@@ -28,32 +28,25 @@ int main() {
         getline(cin, familyMem[i].birthCity);
 
         // Input birth year
-        string birthYrStr;
-        int birthYr;
-        bool validYr = false;
-        while (!validYr) {
+        while (true) {
             cout << "Enter birth year (in the format 19XX or 20XX): ";
-            getline(cin, birthYrStr);
-            if (birthYrStr.size() == 4 && birthYrStr[0] == '1' && (birthYrStr[1] == '9' || birthYrStr[1] == '0')) {
-                birthYr = stoi(birthYrStr.substr(0, 2));
-                validYr = true;
-            } else if (birthYrStr.size() == 4 && birthYrStr[0] == '2' && birthYrStr[1] == '0') {
-                birthYr = stoi(birthYrStr.substr(0, 2));
-                validYr = true;
+            cin >> familyMem[i].birthYr;
+            if (familyMem[i].birthYr >= 1900 && familyMem[i].birthYr <= 2018) {
+                break;
             } else {
-                cout << "Invalid year format. Please enter a valid year.\n";
+                cout << "Invalid year. Please enter a year between 1900 and 2018.\n";
             }
         }
-        familyMem[i].birthYr = birthYr;
+        cin.ignore(); // Clear input buffer
     }
 
     // Output data in a formatted table
     cout << "\n\nFamily Member Data:\n";
-    cout << "----------------------------------------\n";
+    cout << "---------------------------------------------\n";
     cout << "Name\t\tBirth City\tBirth Year\n";
-    cout << "----------------------------------------\n";
+    cout << "---------------------------------------------\n";
     for (int i = 0; i < NUM_FAMILY_MEMBERS; ++i) {
-        cout << familyMem[i].name << "\t\t" << familyMem[i].birthCity << "\t\t" << "19" << familyMem[i].birthYr << endl;
+        cout << familyMem[i].name << "\t\t" << familyMem[i].birthCity << "\t\t" << familyMem[i].birthYr << endl;
     }
 
     // Free memory (clear out)
